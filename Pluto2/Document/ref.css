@@ -1,0 +1,20 @@
+pre.func{
+	font-family: 'Courier New';
+	border: 1px solid gray;
+	margin: 5px 7px;
+	padding: 7px 3px;
+}
+
+pre.lua{
+	font-family: 'Courier New';
+	border: 1px solid gray;
+	margin: 5px 7px;
+	padding: 7px 3px;
+}
+
+pre.notice{
+	font-size: 12px;
+	border: 1px solid gray;
+	margin: 12px 20px;
+	padding: 7px 5px;
+}

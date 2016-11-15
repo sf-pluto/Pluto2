@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="ja">
+
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=Shift_JIS">
+	<meta name="author" content="Scior">
+	<title>Pluto リファレンスマニュアル</title>
+	<link rel="stylesheet" type="text/css" href="ref.css">
+</head>
+
+<body>
+
+<hr>
+<h1>Pluto リファレンスマニュアル</h1>
+<div align="right">Ver 0.01</div>
+<hr>
+
+<h2>はじめに</h2>
+<h3>Plutoとは</h3>
+<p>Pluto(Prototype LUa-based game TOol)とは、スクリプト言語Luaを使ったゲームエンジンです。
+主に2Dゲーム製作を対象としています。</p>
+
+<h3>構造</h3>
+<p>Pluto。</p>
+
+<h2>メインファイル</h2>
+<p>Pluto本体を実行すると、メインファイル"main.lua"が読み込まれます。
+"main.lua"以外の名前を使うことはできません。</p>
+<p>main.lua内にはMain関数が必要です。実行時にこの関数が呼ばれます。
+ただし、main.lua内で使える関数は、通常のファイル内で使える関数と異なります。
+使える関数は以下の通りです。</p>
+<ul type="disc">
+	<li><a href="#func_createScene">createScene</a></li>
+	<li><a href="#func_initPluto">initPluto</a></li>
+	<li><a href="#func_setTitle">setTitle</a></li>
+	<li><a href="#func_setWindow">setWindow</a></li>
+</ul>
+<p><a href="#func_initPluto">initPluto</a>、<a href="#func_setWindow">setWindow</a>、<a href="#func_createScene">createScene</a>の3つの関数は省略できません。
+詳しくは個々の関数の使用法を参照してください。</p>
+
+<h2>グローバル関数</h2>
+
+<h3>Pluto関連</h3>
+<hr>
+
+<h4><a name="#func_createScene">createScene</a></h4>
+<pre class="func">
+createScene(string filepath)
+</pre>
+<p>シーンを生成します。main.luaのみで使用可能です。
+filepathには生成するシーンのluaファイルのパスを記述してください。
+なお、パスはPluto本体からの相対パス、もしくは絶対パスです。</p>
+<hr>
+
+<h4><a name="#func_initPluto">initPluto</a></h4>
+<pre class="func">
+initPluto()
+</pre>
+<p>Plutoを初期化します。main.luaのみで使用可能です。
+このより先に呼び出せる関数は、<a href="#func_setWindow">setWindow</a>
+と<a href="#func_setTitle">setTitle</a>のみです</p>
+<hr>
+
+<h4><a name="#func_setTitle">setTitle</a></h4>
+<pre class="func">
+setTitle(string title)
+</pre>
+<p>ウインドウタイトルを変更します。main.luaでも使用可能です。</p>
+<hr>
+
+<h4><a name="#func_setWindow">setWindow</a></h4>
+<pre class="func">
+setWindow(int x, int y, int depth, int flag)
+</pre>
+<p>画面のサイズ、色深度、モードを変更します。main.luaでも使用可能です。
+x、yは画面の横幅、縦幅、depthは色深度です。
+flagにFALSEをいれた場合フルスクリーンモードに、TRUEをいれた場合、ウインドウモードになります。</p>
+<hr>
+
+<h4><a name="#getFps">getFps</a></h4>
+<pre class="func">
+getFps()
+</pre>
+<p>FPSを浮動小数点で返します。デフォルトでは20フレームごとにFPSは更新されます。</p>
+<hr>
+
+<h3>数学関連</h3>
+luaのmathテーブルの中の関数はすべて使用可能です。
+math.randomとmath.randomseedを除いて、math.absはabsといったように、math.を省略して使用できます。
+math.randomとmath.randomseedの代わりに、getRandom関数とsetSeed関数が用意されています。
+<hr>
+
+
+<h2>メンバ関数</h2>
+
+<h3><a name="#class_Object">Objectクラス</a></h3>
+<hr>
+
+<h4><a name="#obj_constructor">コンストラクタ</a></h4>
+<hr>
+
+<h4><a name="#obj_doAction">doAction</a></h4>
+<pre class="func">
+doAction()
+</pre>
+<p><a href="#obj_setAction">setAction</a>関数で登録された関数を実行します。</p>
+<pre class="notice">
+この関数の処理は少し重いので、大量に使用することは推奨しません。
+必要な場合以外は、直接<a href="#class_Object">Object</a>クラスの個々の関数を使ってください。
+</pre>
+<hr>
+
+<h4><a name="#obj_isHit">isHit</a></h4>
+<pre class="func">
+isHit(Object obj)
+isHit(Group group)
+</pre>
+<p><a href="#class_Object">Object</a>クラス同士の衝突判定や、
+<a href="#class_Group">Group</a>クラスとの当たり判定を行います。</p>
+<p>衝突している場合trueを、衝突していない場合はfalseを返します。</p>
+<hr>
+
+<h4><a name="#obj_setAction">setAction</a></h4>
+<pre class="func">
+setAction(string funcname)
+</pre>
+<p><a href="#obj_doAction">doAction</a>関数で実行される関数の名前を登録します。
+登録する関数は、</p>
+<pre class="lua">
+function Action(e)
+    ...
+end
+</pre>
+<p>のように、引数を一つとる必要があります。
+この引数には、<a href="#class_Object">Object</a>クラスの参照が入ります。</p>
+<hr>
+
+</body>
+
+</html>
